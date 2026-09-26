@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>ریماوب — طرح ج: گرم و خلاقانه</title>
+<style>
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('./assets/Vazirmatn-Variable.woff2') format('woff2-variations');
+    font-weight: 100 900; font-display: block;
+  }
+  :root {
+    --primary:#E4572E; --primary-dark:#B93E1D; --accent:#2A9D8F;
+    --bg:#FAF5EF; --surface:#FFFFFF; --line:#EDE4D9;
+    --ink:#231A14; --muted:#7A6A5F;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Vazirmatn',sans-serif; background:var(--bg); color:var(--ink); overflow-x:hidden; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 32px; }
+
+  header { position:sticky; top:0; background:rgba(250,245,239,.85); backdrop-filter:blur(12px); border-bottom:1px dashed var(--line); z-index:10; }
+  .nav { display:flex; align-items:center; justify-content:space-between; height:78px; }
+  .logo { display:flex; align-items:center; gap:12px; font-weight:800; font-size:21px; }
+  .logo svg { width:42px; height:42px; }
+  nav a { color:var(--muted); text-decoration:none; font-size:14.5px; font-weight:700; margin-inline-start:26px; }
+  nav a.on { color:var(--primary); }
+  .btn { display:inline-block; font-family:inherit; font-weight:800; font-size:14.5px; border-radius:14px; padding:12px 26px; border:2px solid var(--ink); cursor:pointer; text-decoration:none; }
+  .btn-p { background:var(--primary); color:#fff; border-color:var(--primary); box-shadow:4px 4px 0 var(--ink); }
+  .btn-g { background:var(--surface); color:var(--ink); }
+  .btn-g:hover { box-shadow:4px 4px 0 var(--line); }
+  .nav-cta { margin-inline-start:30px; }
+
+  .hero { position:relative; padding:92px 0 66px; }
+  .sticker { position:absolute; top:150px; inset-inline-end:30px; background:var(--accent); color:#fff; font-size:13px; font-weight:800; padding:10px 20px; border-radius:999px; transform:rotate(-8deg); box-shadow:3px 3px 0 rgba(35,26,20,.9); }
+  .hero-chip { display:inline-block; font-size:13px; font-weight:800; color:var(--primary); border:2px dashed var(--primary); border-radius:999px; padding:7px 18px; margin-bottom:28px; }
+  h1 { font-size:62px; font-weight:900; line-height:1.4; letter-spacing:-.5px; }
+  .mark { position:relative; display:inline-block; color:var(--primary); white-space:nowrap; }
+  .mark svg { position:absolute; right:0; left:0; bottom:-6px; width:100%; height:16px; }
+  .hero p { max-width:540px; margin:26px 0 36px; color:var(--muted); font-size:17.5px; line-height:2; }
+  .hero-ctas { display:flex; gap:16px; align-items:center; }
+  .hero-note { font-size:13px; color:var(--muted); font-weight:700; }
+
+  .marquee { margin:70px 0 0; border-block:2px solid var(--ink); background:var(--ink); color:var(--bg); overflow:hidden; padding:16px 0; }
+  .marquee div { display:flex; gap:48px; white-space:nowrap; font-size:16px; font-weight:800; }
+  .marquee span i { font-style:normal; color:var(--accent); margin-inline-start:48px; }
+
+  section { padding:80px 0; }
+  section.wrap { padding-block:80px; }
+  .sec-head { margin-bottom:48px; }
+  .kicker { font-size:13.5px; font-weight:800; color:var(--primary); letter-spacing:1px; margin-bottom:12px; }
+  h2 { font-size:36px; font-weight:900; }
+
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .work { text-align:center; }
+  .work .thumb { height:250px; border-radius:130px 130px 24px 24px; border:2px solid var(--ink); position:relative; overflow:hidden; }
+  .work .thumb .tagf { position:absolute; bottom:14px; inset-inline-start:50%; transform:translateX(50%); background:var(--bg); border:2px solid var(--ink); border-radius:999px; font-size:12px; font-weight:800; padding:6px 16px; white-space:nowrap; }
+  .work h3 { font-size:18px; font-weight:900; margin-top:20px; }
+  .work span { font-size:13px; color:var(--muted); font-weight:600; }
+
+  .svc-row { display:flex; align-items:center; gap:30px; padding:30px 10px; border-top:2px solid var(--line); }
+  .svc-row:last-child { border-bottom:2px solid var(--line); }
+  .svc-row .num { font-size:30px; font-weight:900; color:var(--primary); min-width:56px; }
+  .svc-row h3 { font-size:20px; font-weight:900; margin-bottom:6px; }
+  .svc-row p { font-size:14px; color:var(--muted); line-height:1.9; max-width:560px; }
+  .svc-row .go { margin-inline-start:auto; width:52px; height:52px; border-radius:50%; border:2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-size:20px; background:var(--surface); flex-shrink:0; }
+
+  .about { display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:center; }
+  .avatar { width:300px; height:340px; border-radius:150px 150px 28px 28px; background:linear-gradient(160deg,#F4C7AE,#E4572E); border:2px solid var(--ink); display:flex; align-items:flex-end; justify-content:center; padding-bottom:26px; }
+  .avatar span { font-size:64px; font-weight:900; color:#fff; }
+  .about h2 { margin-bottom:16px; }
+  .about p { color:var(--muted); font-size:15.5px; line-height:2.1; margin-bottom:28px; }
+
+  .cta-band { background:var(--ink); color:var(--bg); border-radius:32px; padding:72px; text-align:center; position:relative; overflow:hidden; }
+  .cta-band h2 { font-size:34px; font-weight:900; margin-bottom:14px; }
+  .cta-band h2 em { font-style:normal; color:var(--accent); }
+  .cta-band p { opacity:.75; font-size:15.5px; margin-bottom:32px; }
+  .cta-band .btn { background:var(--primary); color:#fff; border-color:var(--bg); box-shadow:4px 4px 0 var(--accent); font-size:15px; }
+
+  footer { padding:36px 0; color:var(--muted); font-size:13.5px; }
+  .foot { display:flex; align-items:center; justify-content:space-between; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="logo">
+      <svg viewBox="0 0 124 124"><rect x="6" y="6" width="112" height="112" rx="32" fill="none" stroke="#231A14" stroke-width="8"/><circle cx="36" cy="34" r="6" fill="#EDE4D9"/><circle cx="55" cy="34" r="6" fill="#EDE4D9"/><circle cx="74" cy="34" r="6" fill="#E4572E"/><rect x="34" y="56" width="58" height="10" rx="5" fill="#231A14"/><rect x="34" y="78" width="36" height="10" rx="5" fill="#E4572E"/></svg>
+      ریماوب
+    </div>
+    <nav>
+      <a class="on" href="#">خانه</a><a href="#">خدمات</a><a href="#">نمونه‌کارها</a><a href="#">درباره من</a><a href="#">تماس</a>
+      <a class="btn btn-p nav-cta" href="#">سفارش پروژه</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <span class="sticker">✦ ظرفیت پروژه‌ی این ماه: ۲ جای خالی</span>
+  <span class="hero-chip">طراح و توسعه‌دهنده وب مستقل</span>
+  <h1>ایده‌ی شما،<br>وب‌سایتی که <span class="mark">می‌درخشد<svg viewBox="0 0 200 16" preserveAspectRatio="none"><path d="M4 12 C 50 2, 150 2, 196 10" fill="none" stroke="#2A9D8F" stroke-width="6" stroke-linecap="round"/></svg></span><br>در دنیای دیجیتال</h1>
+  <p>من وب‌سایت‌هایی می‌سازم که نه‌فقط چشم‌نواز هستند، بلکه برای کسب‌وکارتان مشتری می‌آورند. از رستوران تا فروشگاه آنلاین — با هم می‌سازیمش.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-p" href="#" style="font-size:15.5px; padding:14px 36px;">بزن بریم! 🚀</a>
+    <a class="btn btn-g" href="#" style="font-size:15.5px; padding:14px 36px;">کارهای من</a>
+    <span class="hero-note">مشاوره اولیه رایگان است</span>
+  </div>
+</div>
+
+<div class="marquee"><div><span>طراحی وب<i>✦</i>فروشگاه آنلاین<i>✦</i>سئو<i>✦</i>رابط کاربری<i>✦</i>توسعه فرانت‌اند<i>✦</i>پنل مدیریت<i>✦</i>سرعت بالا<i>✦</i>پشتیبانی واقعی</span></div></div>
+
+<section class="wrap">
+  <div class="sec-head"><div class="kicker">— نمونه‌کارها</div><h2>کارهایی که بهشان افتخار می‌کنم</h2></div>
+  <div class="grid3">
+    <div class="work"><div class="thumb" style="background:linear-gradient(160deg,#4F46E5,#7C6CFF)"><span class="tagf">رزرو آنلاین</span></div><h3>آرایشگاه لاکچری</h3><span>وب‌سایت رزرو نوبت</span></div>
+    <div class="work"><div class="thumb" style="background:linear-gradient(160deg,#F4C7AE,#E4572E)"><span class="tagf">فروشگاه</span></div><h3>آکادمی آموزش آنلاین</h3><span>فروشگاه دوره‌های تخصصی</span></div>
+    <div class="work"><div class="thumb" style="background:linear-gradient(160deg,#7FC8BE,#2A9D8F)"><span class="tagf">سامانه</span></div><h3>آژانس املاک</h3><span>سامانه رزرو و مدیریت ملک</span></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head"><div class="kicker">— خدمات</div><h2>چیکارهایی براتون می‌کنم؟</h2></div>
+  <div class="svc-row"><div class="num">۰۱</div><div><h3>طراحی رابط کاربری</h3><p>طراحی مدرن و کاربرمحور؛ اول چند طرح می‌بینید، بعد با تایید خودتان جلو می‌رویم.</p></div><div class="go">←</div></div>
+  <div class="svc-row"><div class="num">۰۲</div><div><h3>توسعه وب</h3><p>پیاده‌سازی سریع و تمیز با جدیدترین تکنولوژی‌ها؛ بدون دردسر، بدون کندی.</p></div><div class="go">←</div></div>
+  <div class="svc-row"><div class="num">۰۳</div><div><h3>فروشگاه آنلاین</h3><p>فروشگاه کامل با درگاه پرداخت، پنل مدیریت و همه‌چیزهایی که برای فروش نیاز دارید.</p></div><div class="go">←</div></div>
+  <div class="svc-row"><div class="num">۰۴</div><div><h3>سئو و بهینه‌سازی</h3><p>تا مشتری‌ها در گوگل پیدایتان کنند؛ سرعت بالا و ساختار درست.</p></div><div class="go">←</div></div>
+</section>
+
+<section class="wrap about">
+  <div class="avatar"><span>ریما</span></div>
+  <div>
+    <div class="kicker">— درباره من</div>
+    <h2>سلام! من ریما هستم 👋</h2>
+    <p>۷ سال است وب‌سایت می‌سازم و در این سال‌ها یاد گرفته‌م فرمول موفقیت یک وب‌سایت چیست: طراحی که اعتماد می‌سازد، سرعتی که مشتری را نگه می‌دارد و ساختاری که در گوگل دیده شود. اگر دنبال کسی هستید که هم سلیقه دارد هم تعهد — جای درستی آمده‌اید.</p>
+    <a class="btn btn-g" href="#">بیشتر درباره‌ام بدانید</a>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="cta-band">
+    <h2>بیا وب‌سایتت را با هم <em>بسازیم</em></h2>
+    <p>قسمت سخت با من؛ شما فقط رویای کسب‌وکارتان را تعریف کنید</p>
+    <a class="btn" href="#">گفتگو را شروع کنیم</a>
+  </div>
+</section>
+
+<footer><div class="wrap foot"><span>© ۱۴۰۵ ریماوب — با ❤️ ساخته شده</span><span>hello@rimaweb.ir</span></div></footer>
+</body>
+</html>

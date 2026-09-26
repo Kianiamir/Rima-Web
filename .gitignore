@@ -1,0 +1,10 @@
+node_modules
+.next
+.pglite
+.env
+*.tsbuildinfo
+next-env.d.ts
+public/uploads/*
+!public/uploads/.gitkeep
+.zcode/
+*.log

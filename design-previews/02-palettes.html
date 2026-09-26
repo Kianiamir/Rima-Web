@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ریماوب — مرحله ۲: انتخاب پالت رنگی</title>
+<style>
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('./assets/Vazirmatn-Variable.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-display: block;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: #0C0C10;
+    color: #EDEDF2;
+    min-height: 100vh;
+    padding: 48px 32px 80px;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 52px; }
+  .step-badge {
+    display: inline-block; background: rgba(124,140,255,.12); color: #97A5FF;
+    border: 1px solid rgba(124,140,255,.3); border-radius: 999px;
+    font-size: 14px; font-weight: 600; padding: 6px 18px; margin-bottom: 18px;
+  }
+  h1 { font-size: 34px; font-weight: 800; margin-bottom: 10px; }
+  .sub { color: #9A9AA8; font-size: 16px; line-height: 1.9; max-width: 660px; margin: 0 auto; }
+
+  .card {
+    background: #131318;
+    border: 1px solid #23232C;
+    border-radius: 24px;
+    padding: 36px;
+    margin-bottom: 36px;
+  }
+  .card-head { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+  .tag {
+    min-width: 52px; height: 52px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 800;
+  }
+  .p1 .tag { background: rgba(79,70,229,.16); color: #8B8BFF; }
+  .p2 .tag { background: rgba(124,108,255,.14); color: #A99BFF; }
+  .p3 .tag { background: rgba(228,87,46,.14); color: #FF8A64; }
+  .card-title { font-size: 21px; font-weight: 800; }
+  .card-desc { color: #9A9AA8; font-size: 14.5px; line-height: 1.9; margin-top: 4px; }
+
+  .swatches { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-bottom: 24px; }
+  .sw { border-radius: 14px; overflow: hidden; border: 1px solid #23232C; }
+  .sw .c { height: 74px; }
+  .sw .l { background: #1B1B22; padding: 8px 10px; }
+  .sw .n { font-size: 11px; color: #8B8B98; margin-bottom: 2px; }
+  .sw .h { font-size: 11.5px; color: #C9C9D4; direction: ltr; text-align: right; font-family: ui-monospace, monospace; }
+
+  .ui-demo { border-radius: 18px; padding: 34px; }
+  .demo-inner {
+    background: var(--surface); border-radius: 14px; padding: 22px 24px;
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .demo-text h4 { font-size: 17px; font-weight: 800; color: var(--ink); margin-bottom: 6px; }
+  .demo-text p { font-size: 13px; color: var(--muted); line-height: 1.8; max-width: 380px; }
+  .demo-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+  .btn {
+    font-family: inherit; font-size: 13.5px; font-weight: 700;
+    border-radius: 10px; padding: 10px 20px; border: none;
+  }
+  .btn.primary { background: var(--primary); color: var(--on-primary); }
+  .btn.ghost { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+  .chipx {
+    display: inline-block; font-size: 11.5px; font-weight: 700; border-radius: 999px;
+    padding: 4px 12px; background: var(--accent-soft); color: var(--accent-text);
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="step-badge">مرحله ۲ از ۵</div>
+    <h1>انتخاب پالت رنگی «ریماوب»</h1>
+    <p class="sub">سه پالت با شخصیت‌های متفاوت. زیر هر پالت، یک نمونه‌ی کوچک از رابط کاربری می‌بینید تا حس واقعی رنگ‌ها در محصول مشخص شود. پالت انتخابی با لوگو و UI مرحله بعد هماهنگ می‌شود.</p>
+  </header>
+
+  <!-- ═══════════ پالت ۱ — نیلی ═══════════ -->
+  <section class="card p1">
+    <div class="card-head">
+      <div class="tag">۱</div>
+      <div>
+        <div class="card-title">نیلی — روشن و حرفه‌ای</div>
+        <div class="card-desc">آبی‌نیلی اعتمادساز روی زمینه‌ی روشن با اکسنت کهربایی. هماهنگ با لوگوی طرح A. حس مطمئن، تمیز و سازمانی — مناسب جذب مشتریان جدی کسب‌وکار.</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="sw"><div class="c" style="background:#4F46E5"></div><div class="l"><div class="n">اصلی</div><div class="h">#4F46E5</div></div></div>
+      <div class="sw"><div class="c" style="background:#3730A3"></div><div class="l"><div class="n">اصلی تیره</div><div class="h">#3730A3</div></div></div>
+      <div class="sw"><div class="c" style="background:#F59E0B"></div><div class="l"><div class="n">اکسنت</div><div class="h">#F59E0B</div></div></div>
+      <div class="sw"><div class="c" style="background:#FAFAF8"></div><div class="l"><div class="n">زمینه</div><div class="h">#FAFAF8</div></div></div>
+      <div class="sw"><div class="c" style="background:#FFFFFF"></div><div class="l"><div class="n">سطح</div><div class="h">#FFFFFF</div></div></div>
+      <div class="sw"><div class="c" style="background:#1B2340"></div><div class="l"><div class="n">متن</div><div class="h">#1B2340</div></div></div>
+      <div class="sw"><div class="c" style="background:#64748B"></div><div class="l"><div class="n">متن کم‌رنگ</div><div class="h">#64748B</div></div></div>
+    </div>
+    <div class="ui-demo" style="background:#FAFAF8; --primary:#4F46E5; --on-primary:#fff; --accent-soft:#FEF3C7; --accent-text:#B45309; --surface:#fff; --line:#E7E5E4; --ink:#1B2340; --muted:#64748B;">
+      <div class="demo-inner">
+        <div class="demo-text">
+          <span class="chipx">طراحی وب حرفه‌ای</span>
+          <h4>وب‌سایتی که مشتری را تبدیل به خریدار می‌کند</h4>
+          <p>طراحی مدرن، سریع و سئوشده برای کسب‌وکار شما</p>
+        </div>
+        <div class="demo-actions">
+          <button class="btn primary">شروع پروژه</button>
+          <button class="btn ghost">نمونه‌کارها</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ پالت ۲ — کهکشان ═══════════ -->
+  <section class="card p2">
+    <div class="card-head">
+      <div class="tag">۲</div>
+      <div>
+        <div class="card-title">کهکشان — تیره و فوتوریست</div>
+        <div class="card-desc">بنفش الکتریکی روی زمینه‌ی شب‌رنگ با اکسنت فیروزه‌ای. حس فناورانه و لوکس؛ خودنمایی می‌کند و در یاد می‌ماند. مناسب برندی که می‌خواهد «مدرن و متفاوت» دیده شود.</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="sw"><div class="c" style="background:#7C6CFF"></div><div class="l"><div class="n">اصلی</div><div class="h">#7C6CFF</div></div></div>
+      <div class="sw"><div class="c" style="background:#5B4BD6"></div><div class="l"><div class="n">اصلی تیره</div><div class="h">#5B4BD6</div></div></div>
+      <div class="sw"><div class="c" style="background:#2DD4BF"></div><div class="l"><div class="n">اکسنت</div><div class="h">#2DD4BF</div></div></div>
+      <div class="sw"><div class="c" style="background:#0B0D14"></div><div class="l"><div class="n">زمینه</div><div class="h">#0B0D14</div></div></div>
+      <div class="sw"><div class="c" style="background:#151824"></div><div class="l"><div class="n">سطح</div><div class="h">#151824</div></div></div>
+      <div class="sw"><div class="c" style="background:#EEF0F8"></div><div class="l"><div class="n">متن</div><div class="h">#EEF0F8</div></div></div>
+      <div class="sw"><div class="c" style="background:#8B90A5"></div><div class="l"><div class="n">متن کم‌رنگ</div><div class="h">#8B90A5</div></div></div>
+    </div>
+    <div class="ui-demo" style="background:#0B0D14; --primary:#7C6CFF; --on-primary:#fff; --accent-soft:rgba(45,212,191,.14); --accent-text:#5EEAD4; --surface:#151824; --line:#262B3D; --ink:#EEF0F8; --muted:#8B90A5;">
+      <div class="demo-inner">
+        <div class="demo-text">
+          <span class="chipx">طراحی وب حرفه‌ای</span>
+          <h4>وب‌سایتی که مشتری را تبدیل به خریدار می‌کند</h4>
+          <p>طراحی مدرن، سریع و سئوشده برای کسب‌وکار شما</p>
+        </div>
+        <div class="demo-actions">
+          <button class="btn primary">شروع پروژه</button>
+          <button class="btn ghost">نمونه‌کارها</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ پالت ۳ — مرجانی ═══════════ -->
+  <section class="card p3">
+    <div class="card-head">
+      <div class="tag">۳</div>
+      <div>
+        <div class="card-title">مرجانی — گرم و متمایز</div>
+        <div class="card-desc">نارنجی‌مرجانی پرانرژی روی زمینه‌ی کرم گرم با اکسنت سبز عمیق. متفاوت از رایج‌ترین رنگ‌های وب؛ صمیمی، هنری و به‌یادماندنی. مناسب برندی با روحیه‌ی خلاقانه.</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="sw"><div class="c" style="background:#E4572E"></div><div class="l"><div class="n">اصلی</div><div class="h">#E4572E</div></div></div>
+      <div class="sw"><div class="c" style="background:#B93E1D"></div><div class="l"><div class="n">اصلی تیره</div><div class="h">#B93E1D</div></div></div>
+      <div class="sw"><div class="c" style="background:#2A9D8F"></div><div class="l"><div class="n">اکسنت</div><div class="h">#2A9D8F</div></div></div>
+      <div class="sw"><div class="c" style="background:#FAF5EF"></div><div class="l"><div class="n">زمینه</div><div class="h">#FAF5EF</div></div></div>
+      <div class="sw"><div class="c" style="background:#FFFFFF"></div><div class="l"><div class="n">سطح</div><div class="h">#FFFFFF</div></div></div>
+      <div class="sw"><div class="c" style="background:#231A14"></div><div class="l"><div class="n">متن</div><div class="h">#231A14</div></div></div>
+      <div class="sw"><div class="c" style="background:#7A6A5F"></div><div class="l"><div class="n">متن کم‌رنگ</div><div class="h">#7A6A5F</div></div></div>
+    </div>
+    <div class="ui-demo" style="background:#FAF5EF; --primary:#E4572E; --on-primary:#fff; --accent-soft:#D8EEE9; --accent-text:#1D7168; --surface:#fff; --line:#EDE4D9; --ink:#231A14; --muted:#7A6A5F;">
+      <div class="demo-inner">
+        <div class="demo-text">
+          <span class="chipx">طراحی وب حرفه‌ای</span>
+          <h4>وب‌سایتی که مشتری را تبدیل به خریدار می‌کند</h4>
+          <p>طراحی مدرن، سریع و سئوشده برای کسب‌وکار شما</p>
+        </div>
+        <div class="demo-actions">
+          <button class="btn primary">شروع پروژه</button>
+          <button class="btn ghost">نمونه‌کارها</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

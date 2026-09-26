@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rimaweb
+      POSTGRES_PASSWORD: rimaweb_secret
+      POSTGRES_DB: rimaweb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rimaweb"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://rimaweb:rimaweb_secret@db:5432/rimaweb
+    ports:
+      - "3600:3600"
+    volumes:
+      # Uploaded project covers survive rebuilds.
+      - uploads:/app/public/uploads
+
+volumes:
+  pgdata:
+  uploads:
