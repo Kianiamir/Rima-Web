@@ -32,12 +32,14 @@ npm run dev         # http://localhost:3600
 
 ```bash
 docker compose up -d --build
-# داخل کانتینر وب (یک بار):
-docker compose exec web npx drizzle-kit push
-docker compose exec web sh -c "ADMIN_PASSWORD=<رمز-امن> npm run db:seed"
 ```
 
-با ست‌شدن `DATABASE_URL`، اپ خودکار به PostgreSQL وصل می‌شود.
+همین! `docker-entrypoint.sh` موقع هر بوت خودکار: منتظر دیتابیس می‌ماند → اسکیمای Drizzle را push می‌کند → ادمین و داده‌های نمونه را idempotent می‌سازد → سرور را اجرا می‌کند. سایت روی `http://localhost:3600` سرو می‌شود.
+
+- رمز و ایمیل ادمین از env های `docker-compose.yml` (`ADMIN_*`) — قبل از انتشار عمومی عوض کنید
+- کاورهای آپلودی در والیوم `uploads` و دیتا در `pgdata` می‌مانند و با rebuild از بین نمی‌روند
+
+با ست‌شدن `DATABASE_URL`، اپ خودکار به PostgreSQL وصل می‌شود؛ بدون آن با PGlite محلی اجرا می‌شود.
 
 ## برندینگ
 
