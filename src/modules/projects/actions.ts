@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { projects } from "@/db/schema";
 import { requireAdmin } from "@/modules/auth/session";
+import { parseIsoDate, parseJalali } from "@/lib/format";
 
 export type ProjectInput = {
   title: string;
@@ -20,6 +21,15 @@ export type ProjectInput = {
   featured: boolean;
   published: boolean;
   sortOrder: number;
+  // Private management data.
+  clientName: string;
+  clientPhone: string;
+  clientEmail: string;
+  contractAmount: number | null;
+  paidAmount: number;
+  startDate: string | null; // ISO YYYY-MM-DD
+  dueDate: string | null;
+  internalNote: string;
 };
 
 function slugify(value: string): string {
@@ -54,6 +64,26 @@ async function saveCover(file: File): Promise<string> {
   return `/uploads/${name}`;
 }
 
+function parseAmount(value: FormDataEntryValue | null): number | null {
+  const raw = normalizeDigits(String(value ?? "").trim());
+  if (!raw) return null;
+  const n = Number(raw.replace(/[,،]/g, ""));
+  return Number.isFinite(n) && n >= 0 ? Math.round(n) : null;
+}
+
+const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
+function normalizeDigits(s: string): string {
+  return s.replace(/[۰-۹]/g, (d) => String(FA_DIGITS.indexOf(d)));
+}
+
+/** Accepts a Jalali (`1404/07/15`) or ISO (`2025-10-07`) date string. */
+function parseDateInput(value: FormDataEntryValue | null): string | null {
+  const raw = String(value ?? "").trim();
+  if (!raw) return null;
+  const d = raw.includes("/") ? parseJalali(raw) : parseIsoDate(raw);
+  return d ? d.toISOString().slice(0, 10) : null;
+}
+
 function parseInput(formData: FormData): ProjectInput {
   return {
     title: String(formData.get("title") ?? "").trim(),
@@ -68,6 +98,15 @@ function parseInput(formData: FormData): ProjectInput {
     featured: formData.get("featured") === "on",
     published: formData.get("published") === "on",
     sortOrder: Number(formData.get("sortOrder") ?? 0) || 0,
+    // Private management data.
+    clientName: String(formData.get("clientName") ?? "").trim(),
+    clientPhone: String(formData.get("clientPhone") ?? "").trim(),
+    clientEmail: String(formData.get("clientEmail") ?? "").trim(),
+    contractAmount: parseAmount(formData.get("contractAmount")),
+    paidAmount: parseAmount(formData.get("paidAmount")) ?? 0,
+    startDate: parseDateInput(formData.get("startDate")),
+    dueDate: parseDateInput(formData.get("dueDate")),
+    internalNote: String(formData.get("internalNote") ?? "").trim(),
   };
 }
 

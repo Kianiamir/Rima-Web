@@ -7,6 +7,7 @@ import {
   updateProject,
   type ProjectFormState,
 } from "@/modules/projects/actions";
+import { formatJalali } from "@/lib/format";
 
 const initial: ProjectFormState = {};
 
@@ -19,6 +20,17 @@ const GRADIENTS = [
 
 const inputCls =
   "w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm outline-none transition placeholder:text-muted/60 focus:border-primary/60";
+
+const sectionTitle = "mb-3 border-b border-line pb-2 text-sm font-extrabold text-primary-soft";
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <fieldset className="mt-2">
+      <legend className={sectionTitle}>{title}</legend>
+      {children}
+    </fieldset>
+  );
+}
 
 export function ProjectForm({ project }: { project?: Project }) {
   const isEdit = Boolean(project);
@@ -82,6 +94,87 @@ export function ProjectForm({ project }: { project?: Project }) {
           <input name="tags" defaultValue={project?.tags} placeholder="Next.js, طراحی رستوران" className={inputCls} />
         </label>
       </div>
+
+      <Section title="مشخصات مشتری (خصوصی)">
+        <div className="grid gap-5 sm:grid-cols-3">
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold">نام مشتری</span>
+            <input name="clientName" defaultValue={project?.clientName} className={inputCls} />
+          </label>
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold">تلفن</span>
+            <input name="clientPhone" defaultValue={project?.clientPhone} dir="ltr" className={inputCls} />
+          </label>
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold">ایمیل</span>
+            <input name="clientEmail" defaultValue={project?.clientEmail} dir="ltr" className={inputCls} />
+          </label>
+        </div>
+      </Section>
+
+      <Section title="اطلاعات مالی (خصوصی — تومان)">
+        <div className="grid gap-5 sm:grid-cols-2">
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold">مبلغ قرارداد</span>
+            <input
+              name="contractAmount"
+              defaultValue={project?.contractAmount ?? ""}
+              dir="ltr"
+              inputMode="numeric"
+              placeholder="45,000,000"
+              className={inputCls}
+            />
+          </label>
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold">پرداخت‌شده</span>
+            <input
+              name="paidAmount"
+              defaultValue={project?.paidAmount ? project.paidAmount : ""}
+              dir="ltr"
+              inputMode="numeric"
+              placeholder="15,000,000"
+              className={inputCls}
+            />
+          </label>
+        </div>
+      </Section>
+
+      <Section title="زمان‌بندی (خصوصی)">
+        <div className="grid gap-5 sm:grid-cols-2">
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold">تاریخ شروع (شمسی)</span>
+            <input
+              name="startDate"
+              defaultValue={project?.startDate ? formatJalali(project.startDate) : ""}
+              dir="ltr"
+              placeholder="1404/07/15"
+              className={inputCls}
+            />
+          </label>
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold">ددلاین تحویل (شمسی)</span>
+            <input
+              name="dueDate"
+              defaultValue={project?.dueDate ? formatJalali(project.dueDate) : ""}
+              dir="ltr"
+              placeholder="1404/08/01"
+              className={inputCls}
+            />
+          </label>
+        </div>
+      </Section>
+
+      <Section title="یادداشت داخلی (خصوصی)">
+        <label className="grid gap-2">
+          <textarea
+            name="internalNote"
+            rows={4}
+            defaultValue={project?.internalNote}
+            placeholder="نکات جلسات، خواسته‌های مشتری، وضعیت پرداخت‌ها…"
+            className={`${inputCls} resize-y`}
+          />
+        </label>
+      </Section>
 
       <label className="grid gap-2">
         <span className="text-sm font-semibold">تصویر کاور</span>

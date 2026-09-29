@@ -5,6 +5,8 @@ import {
   varchar,
   boolean,
   integer,
+  bigint,
+  date,
   timestamp,
 } from "drizzle-orm/pg-core";
 
@@ -31,7 +33,7 @@ export const sessions = pgTable("sessions", {
 });
 
 /* ------------------------------------------------------------------ */
-/* Portfolio                                                           */
+/* Portfolio + private project management                              */
 /* ------------------------------------------------------------------ */
 
 export const projects = pgTable("projects", {
@@ -53,6 +55,33 @@ export const projects = pgTable("projects", {
   published: boolean("published").notNull().default(true),
   sortOrder: integer("sort_order").notNull().default(0),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+
+  // ── Private management data (never shown on the public site) ──
+  clientName: varchar("client_name", { length: 120 }).notNull().default(""),
+  clientPhone: varchar("client_phone", { length: 40 }).notNull().default(""),
+  clientEmail: varchar("client_email", { length: 190 }).notNull().default(""),
+  // Amounts in Toman.
+  contractAmount: bigint("contract_amount", { mode: "number" }),
+  paidAmount: bigint("paid_amount", { mode: "number" }).notNull().default(0),
+  startDate: date("start_date"),
+  dueDate: date("due_date"),
+  internalNote: text("internal_note").notNull().default(""),
+});
+
+/* ------------------------------------------------------------------ */
+/* Per-project tasks (the admin todo lists)                            */
+/* ------------------------------------------------------------------ */
+
+export const tasks = pgTable("tasks", {
+  id: serial("id").primaryKey(),
+  // Null → personal task, not tied to a project.
+  projectId: integer("project_id").references(() => projects.id, {
+    onDelete: "cascade",
+  }),
+  title: varchar("title", { length: 300 }).notNull(),
+  isDone: boolean("is_done").notNull().default(false),
+  sortOrder: integer("sort_order").notNull().default(0),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
 /* ------------------------------------------------------------------ */
@@ -70,5 +99,6 @@ export const messages = pgTable("messages", {
 });
 
 export type Project = typeof projects.$inferSelect;
+export type Task = typeof tasks.$inferSelect;
 export type Message = typeof messages.$inferSelect;
 export type AdminUser = typeof adminUsers.$inferSelect;
