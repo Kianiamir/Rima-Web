@@ -1,0 +1,12 @@
+node_modules
+.next
+.pglite
+.git
+.zcode
+.env
+.env.example
+*.log
+design-previews/renders
+drizzle
+Dockerfile
+docker-compose.yml

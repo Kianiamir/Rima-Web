@@ -22,11 +22,22 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: postgres://rimaweb:rimaweb_secret@db:5432/rimaweb
+      # Seed credentials — change before going live (entrypoint is idempotent,
+      # the admin is only created once).
+      ADMIN_EMAIL: admin@rimaweb.ir
+      ADMIN_PASSWORD: rimaweb-admin
+      ADMIN_NAME: مدیر ریماوب
     ports:
       - "3600:3600"
     volumes:
       # Uploaded project covers survive rebuilds.
       - uploads:/app/public/uploads
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3600/ >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
 volumes:
   pgdata:
