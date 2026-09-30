@@ -2,7 +2,7 @@ import "dotenv/config";
 import { hash } from "@node-rs/argon2";
 import { eq } from "drizzle-orm";
 import { db } from "../src/db";
-import { adminUsers, projects } from "../src/db/schema";
+import { adminUsers, projects, smsTemplates } from "../src/db/schema";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? "admin@rimaweb.ir";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "rimaweb-admin";
@@ -78,6 +78,28 @@ async function main() {
     if (rows.length === 0) {
       await db.insert(projects).values(p);
       console.log(`✓ project seeded: ${p.title}`);
+    }
+  }
+
+  // Built-in SMS templates (idempotent by key).
+  const BUILT_IN_SMS_TEMPLATES = [
+    {
+      key: "NEW_MESSAGE",
+      label: "پیام جدید فرم تماس",
+      body: "ریماوب\nپیام جدید از فرم تماس:\nاز: {{NAME}}\n{{TEXT}}",
+      description:
+        "وقتی بازدیدکننده‌ای فرم تماس را پر کند، این پیامک به «موبایل مدیر» در تنظیمات می‌رود.",
+    },
+  ];
+  for (const t of BUILT_IN_SMS_TEMPLATES) {
+    const rows = await db
+      .select({ id: smsTemplates.id })
+      .from(smsTemplates)
+      .where(eq(smsTemplates.key, t.key))
+      .limit(1);
+    if (rows.length === 0) {
+      await db.insert(smsTemplates).values({ ...t, isBuiltIn: true });
+      console.log(`✓ sms template seeded: ${t.key}`);
     }
   }
 

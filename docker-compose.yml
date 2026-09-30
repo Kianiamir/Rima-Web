@@ -27,6 +27,9 @@ services:
       ADMIN_EMAIL: admin@rimaweb.ir
       ADMIN_PASSWORD: rimaweb-admin
       ADMIN_NAME: مدیر ریماوب
+      # Optional fallback when no API key is saved in the SMS panel:
+      # export SMSIR_API_KEY=... before `docker compose up`
+      SMSIR_API_KEY: ${SMSIR_API_KEY:-}
     ports:
       - "3600:3600"
     volumes:

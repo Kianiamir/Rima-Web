@@ -10,6 +10,7 @@ const ADMIN_NAV = [
   { href: "/admin", label: "داشبورد" },
   { href: "/admin/messages", label: "پیام‌ها" },
   { href: "/admin/projects", label: "نمونه‌کارها" },
+  { href: "/admin/sms", label: "پیامک" },
 ] as const;
 
 export default async function AdminLayout({

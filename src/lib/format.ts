@@ -67,3 +67,29 @@ export function formatToman(value: number | null | undefined): string {
   if (value == null) return "—";
   return new Intl.NumberFormat("fa-IR").format(value);
 }
+
+/** Digits → Persian digits (no grouping): 9412 → «۹۴۱۲». */
+export function faNum(value: number | string): string {
+  return String(value).replace(/\d/g, (d) => FA_DIGITS[Number(d)]);
+}
+
+/** Formats a timestamp as Jalali date + HH:mm in Tehran time: `1404/07/15، 14:05`. */
+export function formatJalaliDateTime(value: Date | string | null | undefined): string {
+  if (!value) return "—";
+  const d = typeof value === "string" ? new Date(value) : value;
+  if (!d || Number.isNaN(d.getTime())) return "—";
+
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Tehran",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(d);
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+
+  const { jy, jm, jd } = toJalaali(Number(get("year")), Number(get("month")), Number(get("day")));
+  return `${jy}/${String(jm).padStart(2, "0")}/${String(jd).padStart(2, "0")}، ${get("hour")}:${get("minute")}`;
+}

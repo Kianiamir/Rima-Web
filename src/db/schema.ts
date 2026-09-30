@@ -7,6 +7,7 @@ import {
   integer,
   bigint,
   date,
+  json,
   timestamp,
 } from "drizzle-orm/pg-core";
 
@@ -98,7 +99,54 @@ export const messages = pgTable("messages", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+/* ------------------------------------------------------------------ */
+/* SMS (sms.ir) — settings, editable templates, send log               */
+/* ------------------------------------------------------------------ */
+
+export const smsSettings = pgTable("sms_settings", {
+  id: serial("id").primaryKey(),
+  apiKey: text("api_key"),
+  // sms.ir line number used as sender, e.g. 3000...
+  senderNumber: varchar("sender_number", { length: 40 }).notNull().default(""),
+  // Admin mobile that receives NEW_MESSAGE alerts from the contact form.
+  notifyPhone: varchar("notify_phone", { length: 40 }).notNull().default(""),
+  // When on, sends are only logged (status SANDBOX) — no real provider call.
+  sandbox: boolean("sandbox").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+/** Editable bodies with {{PARAM}} placeholders. */
+export const smsTemplates = pgTable("sms_templates", {
+  id: serial("id").primaryKey(),
+  key: varchar("key", { length: 60 }).notNull().unique(),
+  label: varchar("label", { length: 120 }).notNull(),
+  body: text("body").notNull(),
+  isEnabled: boolean("is_enabled").notNull().default(true),
+  isBuiltIn: boolean("is_built_in").notNull().default(false),
+  description: text("description").notNull().default(""),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const smsMessages = pgTable("sms_messages", {
+  id: serial("id").primaryKey(),
+  phone: varchar("phone", { length: 40 }).notNull(),
+  templateKey: varchar("template_key", { length: 60 }).notNull(),
+  parameters: json("parameters")
+    .$type<{ name: string; value: string }[]>()
+    .notNull(),
+  // PENDING | SENT | FAILED | SANDBOX
+  status: varchar("status", { length: 20 }).notNull().default("PENDING"),
+  providerMessageId: varchar("provider_message_id", { length: 60 }),
+  error: text("error"),
+  purpose: varchar("purpose", { length: 40 }).notNull().default(""),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export type Project = typeof projects.$inferSelect;
 export type Task = typeof tasks.$inferSelect;
 export type Message = typeof messages.$inferSelect;
 export type AdminUser = typeof adminUsers.$inferSelect;
+export type SmsSettings = typeof smsSettings.$inferSelect;
+export type SmsTemplate = typeof smsTemplates.$inferSelect;
+export type SmsMessage = typeof smsMessages.$inferSelect;
