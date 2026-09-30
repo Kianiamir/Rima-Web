@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { requireAdmin } from "@/modules/auth/session";
 import { logoutAction } from "@/modules/auth/actions";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export const metadata: Metadata = { title: "پنل مدیریت" };
 
@@ -46,6 +47,7 @@ export default async function AdminLayout({
                 خروج
               </button>
             </form>
+            <ThemeToggle />
           </div>
         </div>
       </header>

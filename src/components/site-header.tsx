@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./logo";
+import { ThemeToggle } from "./theme-toggle";
 
 const NAV = [
   { href: "/", label: "خانه" },
@@ -31,6 +32,7 @@ export function SiteHeader() {
           >
             سفارش پروژه
           </Link>
+          <ThemeToggle />
         </nav>
       </div>
     </header>

@@ -20,11 +20,15 @@ export const metadata: Metadata = {
   keywords: ["طراحی وب سایت", "طراح وب", "فروشگاه آنلاین", "سئو", "ریماوب"],
 };
 
+/** Runs before paint: stored theme wins, otherwise follow the OS preference. */
+const themeInitScript = `(function(){try{var s=localStorage.getItem("rimaweb-theme");var l=s?s==="light":window.matchMedia("(prefers-color-scheme: light)").matches;document.documentElement.classList.toggle("light",l)}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fa" dir="rtl">
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       <body className="antialiased">{children}</body>
     </html>
   );
