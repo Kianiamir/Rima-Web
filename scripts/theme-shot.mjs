@@ -9,58 +9,57 @@ const browser = await chromium.launch({
   executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
 });
-
-async function newPage(colorScheme) {
-  const ctx = await browser.newContext({
-    viewport: { width: 1440, height: 900 },
-    colorScheme,
-  });
-  const page = await ctx.newPage();
-  return { ctx, page };
-}
-
 const results = [];
 
-// --- 1) First visit, OS dark -> default dark theme
+// ── Public site, light (default) then dark via toggle ──
 {
-  const { ctx, page } = await newPage("dark");
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: "light" });
+  const page = await ctx.newPage();
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
-  const isLight = await page.evaluate(() => document.documentElement.classList.contains("light"));
-  results.push({ shot: "home-dark-first-visit", expectedDark: true, gotLight: isLight });
-  await page.screenshot({ path: `${OUT}/1-home-dark.png` });
+  await page.waitForTimeout(900);
+  const isDarkFirst = await page.evaluate(() => document.documentElement.classList.contains("dark"));
+  results.push({ firstVisitLight: !isDarkFirst });
+  await page.screenshot({ path: `${OUT}/new-1-home-light.png`, fullPage: true });
 
-  // --- 2) Click toggle (top-left) -> light
-  await page.locator('button[aria-label="تغییر به تم روشن"]').click();
+  // toggle to dark
+  await page.locator('button[aria-label="تغییر به تم تیره"]').click();
   await page.waitForTimeout(500);
   const stored = await page.evaluate(() => localStorage.getItem("rimaweb-theme"));
-  const lightNow = await page.evaluate(() => document.documentElement.classList.contains("light"));
-  results.push({ shot: "home-light-after-toggle", stored, lightNow });
-  await page.screenshot({ path: `${OUT}/2-home-light.png` });
+  results.push({ afterToggle: { stored, dark: await page.evaluate(() => document.documentElement.classList.contains("dark")) } });
+  await page.screenshot({ path: `${OUT}/new-2-home-dark.png`, fullPage: true });
 
-  // --- 3) Reload -> persistence (must stay light)
+  // persistence
   await page.reload({ waitUntil: "networkidle" });
-  const lightAfterReload = await page.evaluate(() => document.documentElement.classList.contains("light"));
-  results.push({ check: "persist-after-reload", lightAfterReload });
-  await page.screenshot({ path: `${OUT}/3-home-light-reload.png` });
+  results.push({ persistDark: await page.evaluate(() => document.documentElement.classList.contains("dark")) });
+
+  // inner pages in light (toggle back)
+  await page.locator('button[aria-label="تغییر به تم روشن"]').click();
+  await page.waitForTimeout(400);
+  await page.goto(BASE + "/works", { waitUntil: "networkidle" });
+  await page.screenshot({ path: `${OUT}/new-3-works-light.png`, fullPage: true });
+  await page.goto(BASE + "/about", { waitUntil: "networkidle" });
+  await page.screenshot({ path: `${OUT}/new-4-about-light.png`, fullPage: true });
+  await page.goto(BASE + "/contact", { waitUntil: "networkidle" });
+  await page.screenshot({ path: `${OUT}/new-5-contact-light.png`, fullPage: true });
+  await page.goto(BASE + "/login", { waitUntil: "networkidle" });
+  await page.screenshot({ path: `${OUT}/new-6-login-light.png` });
   await ctx.close();
 }
 
-// --- 4) Admin dashboard in both themes (login once)
+// ── Admin in both themes ──
 {
-  const { ctx, page } = await newPage("dark");
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: "light" });
+  const page = await ctx.newPage();
   await page.goto(BASE + "/login", { waitUntil: "networkidle" });
   await page.locator('input[name="email"]').fill("admin@rimaweb.ir");
   await page.locator('input[name="password"]').fill("rimaweb-admin");
   await page.locator('button[type="submit"]').click();
   await page.waitForURL("**/admin", { timeout: 15000 });
-  await page.waitForTimeout(600);
-  await page.screenshot({ path: `${OUT}/4-admin-dark.png` });
-
-  await page.locator('button[aria-label="تغییر به تم روشن"]').click();
+  await page.waitForTimeout(700);
+  await page.screenshot({ path: `${OUT}/new-7-admin-light.png`, fullPage: true });
+  await page.locator('button[aria-label="تغییر به تم تیره"]').click();
   await page.waitForTimeout(500);
-  const lightAdmin = await page.evaluate(() => document.documentElement.classList.contains("light"));
-  results.push({ shot: "admin-light", lightAdmin });
-  await page.screenshot({ path: `${OUT}/5-admin-light.png` });
+  await page.screenshot({ path: `${OUT}/new-8-admin-dark.png`, fullPage: true });
   await ctx.close();
 }
 

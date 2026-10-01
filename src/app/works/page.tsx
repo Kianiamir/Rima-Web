@@ -24,21 +24,22 @@ export default async function WorksPage() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-6 py-16">
-        <h1 className="text-4xl font-black">
-          نمونه‌کارهای <span className="text-gradient">منتخب</span>
+        <div className="text-[13.5px] font-extrabold tracking-wide text-primary">— نمونه‌کارها</div>
+        <h1 className="mt-3 text-4xl font-black">
+          کارهایی که بهشان <span className="text-primary">افتخار</span> می‌کنم
         </h1>
         <p className="mt-4 max-w-lg text-[15px] leading-8 text-muted">
           مجموعه‌ای از پروژه‌هایی که با عشق و وسواس ساخته‌ام — روی هرکدام کلیک کنید
           تا جزئیاتش را ببینید.
         </p>
         {all.length > 0 ? (
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {all.map((p, i) => (
               <ProjectCard key={p.id} project={p} index={i} />
             ))}
           </div>
         ) : (
-          <p className="mt-12 rounded-2xl border border-dashed border-line p-12 text-center text-sm text-muted">
+          <p className="mt-12 rounded-2xl border-2 border-dashed border-line p-12 text-center text-sm font-semibold text-muted">
             هنوز نمونه‌کاری منتشر نشده — به‌زودی پر می‌شود!
           </p>
         )}

@@ -97,13 +97,13 @@ function TemplateCard({ template }: { template: SmsTemplateRow }) {
               }
             }}
             disabled={isPending}
-            className="rounded-xl border border-line px-5 py-2 text-xs font-bold text-muted transition hover:border-red-500/50 hover:text-red-400 disabled:opacity-50"
+            className="rounded-xl border border-line px-5 py-2 text-xs font-bold text-muted transition hover:border-red-500/50 hover:text-red-500 disabled:opacity-50"
           >
             حذف
           </button>
         ) : null}
         {feedback ? (
-          <span className={`text-xs font-bold ${feedback.ok ? "text-accent" : "text-red-400"}`}>
+          <span className={`text-xs font-bold ${feedback.ok ? "text-accent" : "text-red-500"}`}>
             {feedback.message}
           </span>
         ) : null}
@@ -193,7 +193,7 @@ export function SmsTemplatesManager({ templates }: { templates: SmsTemplateRow[]
               ساخت قالب
             </button>
             {feedback ? (
-              <span className={`text-xs font-bold ${feedback.ok ? "text-accent" : "text-red-400"}`}>
+              <span className={`text-xs font-bold ${feedback.ok ? "text-accent" : "text-red-500"}`}>
                 {feedback.message}
               </span>
             ) : null}

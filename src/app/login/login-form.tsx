@@ -20,7 +20,7 @@ export function LoginForm() {
           type="email"
           required
           dir="ltr"
-          className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm outline-none transition focus:border-primary/60"
+          className="w-full rounded-xl border-2 border-ink/20 bg-surface px-4 py-3 text-sm outline-none transition focus:border-primary"
         />
       </div>
       <div>
@@ -33,18 +33,18 @@ export function LoginForm() {
           type="password"
           required
           dir="ltr"
-          className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm outline-none transition focus:border-primary/60"
+          className="w-full rounded-xl border-2 border-ink/20 bg-surface px-4 py-3 text-sm outline-none transition focus:border-primary"
         />
       </div>
       {state.error && (
-        <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        <p className="rounded-xl border-2 border-red-500/50 bg-red-500/10 px-4 py-3 text-sm font-bold text-red-500">
           {state.error}
         </p>
       )}
       <button
         type="submit"
         disabled={pending}
-        className="btn-glow mt-2 rounded-xl bg-primary px-6 py-3 font-bold text-white transition hover:bg-primary-dark disabled:opacity-60"
+        className="btn-hard btn-hard-primary mt-2 !py-3 disabled:opacity-60"
       >
         {pending ? "در حال ورود…" : "ورود به پنل"}
       </button>

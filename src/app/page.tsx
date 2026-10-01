@@ -9,54 +9,49 @@ import { ProjectCard } from "@/components/project-card";
 export const dynamic = "force-dynamic";
 
 const SERVICES = [
-  {
-    title: "طراحی رابط کاربری",
-    desc: "طراحی UI/UX مدرن و کاربرمحور با تمرکز بر تجربه‌ی بی‌نقص کاربر",
-    icon: (
-      <svg fill="none" strokeWidth="2" viewBox="0 0 24 24" className="h-6 w-6 stroke-primary">
-        <rect x="3" y="4" width="18" height="14" rx="2" />
-        <path d="M3 9h18" />
-      </svg>
-    ),
-  },
-  {
-    title: "توسعه وب",
-    desc: "پیاده‌سازی فرانت‌اند و بک‌اند با تکنولوژی‌های روز دنیا",
-    icon: (
-      <svg fill="none" strokeWidth="2" viewBox="0 0 24 24" className="h-6 w-6 stroke-primary">
-        <path d="m8 8-5 4 5 4M16 8l5 4-5 4M13 5l-2 14" />
-      </svg>
-    ),
-  },
-  {
-    title: "فروشگاه آنلاین",
-    desc: "راه‌اندازی فروشگاه اینترنتی کامل با درگاه پرداخت و پنل مدیریت",
-    icon: (
-      <svg fill="none" strokeWidth="2" viewBox="0 0 24 24" className="h-6 w-6 stroke-primary">
-        <path d="M6 6h15l-1.5 8H8L6 3H3" />
-        <circle cx="9" cy="20" r="1.5" />
-        <circle cx="18" cy="20" r="1.5" />
-      </svg>
-    ),
-  },
-  {
-    title: "سئو و بهینه‌سازی",
-    desc: "بهینه‌سازی سرعت و ساختار برای دیده‌شدن در گوگل",
-    icon: (
-      <svg fill="none" strokeWidth="2" viewBox="0 0 24 24" className="h-6 w-6 stroke-primary">
-        <path d="M3 17l6-6 4 4 8-8" />
-        <path d="M15 7h6v6" />
-      </svg>
-    ),
-  },
+  { n: "۰۱", title: "طراحی رابط کاربری", desc: "طراحی مدرن و کاربرمحور؛ اول چند طرح می‌بینید، بعد با تایید خودتان جلو می‌رویم." },
+  { n: "۰۲", title: "توسعه وب", desc: "پیاده‌سازی سریع و تمیز با جدیدترین تکنولوژی‌ها؛ بدون دردسر، بدون کندی." },
+  { n: "۰۳", title: "فروشگاه آنلاین", desc: "فروشگاه کامل با درگاه پرداخت، پنل مدیریت و همه‌چیزهایی که برای فروش نیاز دارید." },
+  { n: "۰۴", title: "سئو و بهینه‌سازی", desc: "تا مشتری‌ها در گوگل پیدایتان کنند؛ سرعت بالا و ساختار درست." },
 ];
 
-const STEPS = [
-  { n: "۱", title: "مشاوره و تحلیل", desc: "شناخت کسب‌وکار، اهداف و مخاطبان شما" },
-  { n: "۲", title: "طراحی UI", desc: "طراحی چند نسخه و انتخاب با تایید شما" },
-  { n: "۳", title: "توسعه", desc: "پیاده‌سازی کامل با تکنولوژی‌های مدرن" },
-  { n: "۴", title: "راه‌اندازی", desc: "انتشار، آموزش و پشتیبانی پس از تحویل" },
+const MARQUEE_ITEMS = [
+  "طراحی وب",
+  "فروشگاه آنلاین",
+  "سئو",
+  "رابط کاربری",
+  "توسعه فرانت‌اند",
+  "پنل مدیریت",
+  "سرعت بالا",
+  "پشتیبانی واقعی",
 ];
+
+function MarqueeRow() {
+  return (
+    <span>
+      {MARQUEE_ITEMS.map((item) => (
+        <span key={item}>
+          {item} <i>✦</i>{" "}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/** خط موج‌دار زیر کلمهٔ کلیدی تیتر */
+function Squiggle() {
+  return (
+    <svg viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden className="absolute -bottom-1.5 right-0 left-0 h-4 w-full">
+      <path
+        d="M4 12 C 50 2, 150 2, 196 10"
+        fill="none"
+        stroke="var(--color-accent)"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
 export default async function HomePage() {
   const featured = await db
@@ -73,106 +68,94 @@ export default async function HomePage() {
       <main>
         {/* ─── Hero ─── */}
         <section className="hero-glow relative overflow-hidden">
-          <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-24 text-center sm:pt-28">
-            <span className="fade-up inline-block rounded-full border border-accent/25 bg-accent/10 px-4.5 py-2 text-[13px] font-bold text-accent">
-              ✦ طراح و توسعه‌دهنده وب
-            </span>
-            <h1 className="fade-up mt-7 text-4xl leading-[1.4] font-black sm:text-5xl lg:text-[56px]">
-              وب‌سایتی بسازید که <span className="text-gradient">در ذهن می‌ماند</span>
+          <span className="sticker absolute top-[150px] hidden lg:inline-flex" style={{ insetInlineEnd: "30px" }}>
+            ✦ ظرفیت پروژه‌ی این ماه: ۲ جای خالی
+          </span>
+
+          <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-24">
+            <span className="chip-dashed fade-up">طراح و توسعه‌دهنده وب مستقل</span>
+            <h1 className="fade-up mt-7 text-[42px] leading-[1.4] font-black sm:text-5xl lg:text-[62px]">
+              ایده‌ی شما،
+              <br />
+              وب‌سایتی که{" "}
+              <span className="relative inline-block whitespace-nowrap text-primary">
+                می‌درخشد
+                <Squiggle />
+              </span>
+              <br />
+              در دنیای دیجیتال
             </h1>
-            <p className="fade-up mx-auto mt-6 max-w-xl text-[17px] leading-8 text-muted">
-              ترکیب طراحی مدرن و کدنویسی تمیز برای وب‌سایت‌هایی که سریع بارگذاری
-              می‌شوند، در گوگل دیده می‌شوند و مشتری را به خریدار تبدیل می‌کنند.
+            <p className="fade-up mt-6 max-w-[540px] text-[17px] leading-8 font-medium text-muted">
+              من وب‌سایت‌هایی می‌سازم که نه‌فقط چشم‌نواز هستند، بلکه برای کسب‌وکارتان
+              مشتری می‌آورند. از رستوران تا فروشگاه آنلاین — با هم می‌سازیمش.
             </p>
-            <div className="fade-up mt-9 flex justify-center gap-3.5">
-              <Link
-                href="/contact"
-                className="btn-glow rounded-xl bg-primary px-8 py-3.5 text-[15px] font-bold text-white transition hover:bg-primary-dark"
-              >
-                شروع پروژه
+            <div className="fade-up mt-9 flex flex-wrap items-center gap-4">
+              <Link href="/contact" className="btn-hard btn-hard-primary !text-[15px]">
+                بزن بریم 🚀
               </Link>
-              <Link
-                href="/works"
-                className="rounded-xl border border-line bg-primary/5 px-8 py-3.5 text-[15px] font-bold text-ink transition hover:border-primary/50"
-              >
-                مشاهده نمونه‌کارها
+              <Link href="/works" className="btn-hard btn-hard-ghost !text-[15px]">
+                کارهای من
               </Link>
-            </div>
-            <div className="fade-up mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-4">
-              {[
-                ["+۴۰", "پروژه تحویل‌شده"],
-                ["۷ سال", "تجربه طراحی وب"],
-                ["۹۸٪", "رضایت مشتریان"],
-              ].map(([b, s]) => (
-                <div key={s} className="rounded-2xl border border-line bg-surface px-4 py-6">
-                  <b className="block text-2xl font-black sm:text-3xl">{b}</b>
-                  <span className="mt-1 block text-[13px] font-semibold text-muted">{s}</span>
-                </div>
-              ))}
+              <span className="text-[13px] font-bold text-muted">مشاوره اولیه رایگان است</span>
             </div>
           </div>
         </section>
 
-        {/* ─── Services ─── */}
-        <section className="mx-auto max-w-6xl px-6 py-20">
-          <h2 className="text-3xl font-black">
-            خدمات <span className="text-primary">من</span>
-          </h2>
-          <p className="mt-3 text-[15px] text-muted">هرچه برای حضوری قدرتمند در وب نیاز دارید</p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((s) => (
-              <div
-                key={s.title}
-                className="rounded-[20px] border border-line bg-gradient-to-b from-primary/8 to-surface/40 p-7"
-              >
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15">{s.icon}</div>
-                <h3 className="mb-2.5 font-bold">{s.title}</h3>
-                <p className="text-[13.5px] leading-7 text-muted">{s.desc}</p>
-              </div>
-            ))}
+        {/* ─── Marquee ─── */}
+        <div className="marquee" aria-hidden>
+          <div className="marquee-track">
+            <MarqueeRow />
+            <MarqueeRow />
           </div>
-        </section>
+        </div>
 
         {/* ─── Featured works ─── */}
         <section className="mx-auto max-w-6xl px-6 py-20">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <h2 className="text-3xl font-black">
-                نمونه‌کارهای <span className="text-primary">منتخب</span>
-              </h2>
-              <p className="mt-3 text-[15px] text-muted">گزییده از پروژه‌های اخیر</p>
-            </div>
-            <Link href="/works" className="shrink-0 text-sm font-bold text-accent transition hover:opacity-80">
-              مشاهده همه ←
-            </Link>
+          <div className="mb-12">
+            <div className="text-[13.5px] font-extrabold tracking-wide text-primary">— نمونه‌کارها</div>
+            <h2 className="mt-3 text-4xl font-black">کارهایی که بهشان افتخار می‌کنم</h2>
           </div>
           {featured.length > 0 ? (
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {featured.map((p, i) => (
                 <ProjectCard key={p.id} project={p} index={i} />
               ))}
             </div>
           ) : (
-            <p className="mt-10 rounded-2xl border border-dashed border-line p-10 text-center text-sm text-muted">
+            <p className="rounded-2xl border-2 border-dashed border-line p-10 text-center text-sm font-semibold text-muted">
               هنوز نمونه‌کاری منتشر نشده — از پنل مدیریت اولین پروژه را اضافه کنید.
             </p>
           )}
+          <div className="mt-12 text-center">
+            <Link href="/works" className="btn-hard btn-hard-ghost">
+              دیدن همه‌ی کارها
+            </Link>
+          </div>
         </section>
 
-        {/* ─── Process ─── */}
+        {/* ─── Services ─── */}
         <section className="mx-auto max-w-6xl px-6 py-20">
-          <h2 className="text-3xl font-black">
-            روند <span className="text-primary">همکاری</span>
-          </h2>
-          <p className="mt-3 text-[15px] text-muted">از اولین جلسه تا لانچ نهایی، شفاف و مرحله‌به‌مرحله</p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {STEPS.map((s) => (
-              <div key={s.n} className="rounded-[20px] border border-line bg-surface p-7">
-                <b className="mb-4.5 inline-flex h-10 w-10 items-center justify-center rounded-[13px] border border-accent/25 bg-accent/12 text-base text-accent">
-                  {s.n}
-                </b>
-                <h3 className="mb-2 font-bold">{s.title}</h3>
-                <p className="text-[13px] leading-7 text-muted">{s.desc}</p>
+          <div className="mb-4">
+            <div className="text-[13.5px] font-extrabold tracking-wide text-primary">— خدمات</div>
+            <h2 className="mt-3 text-4xl font-black">چیکارهایی براتون می‌کنم؟</h2>
+          </div>
+          <div>
+            {SERVICES.map((s) => (
+              <div
+                key={s.n}
+                className="flex items-center gap-6 border-t-2 border-line py-8 last:border-b-2 sm:gap-8"
+              >
+                <div className="min-w-14 text-3xl font-black text-primary">{s.n}</div>
+                <div>
+                  <h3 className="text-xl font-black">{s.title}</h3>
+                  <p className="mt-1.5 max-w-[560px] text-sm leading-8 text-muted">{s.desc}</p>
+                </div>
+                <span
+                  aria-hidden
+                  className="ms-auto hidden h-13 w-13 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-surface text-xl sm:flex"
+                >
+                  ←
+                </span>
               </div>
             ))}
           </div>
@@ -181,41 +164,37 @@ export default async function HomePage() {
         {/* ─── About snippet ─── */}
         <section className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-20 lg:grid-cols-[300px_1fr]">
           <div
-            className="mx-auto flex h-72 w-72 items-center justify-center rounded-[28px] border border-line lg:h-[300px] lg:w-[300px]"
-            style={{
-              background:
-                "radial-gradient(200px 200px at 30% 25%, rgba(124,108,255,.5), rgba(21,24,36,.2)), var(--color-surface)",
-            }}
+            className="mx-auto flex h-[340px] w-[300px] items-end justify-center rounded-t-full border-2 border-ink pb-7"
+            style={{ background: "linear-gradient(160deg, #C7D2FE, #4F46E5)" }}
           >
-            <span className="text-[100px] font-black text-gradient">ر</span>
+            <span className="text-6xl font-black text-white">ریما</span>
           </div>
           <div>
-            <h2 className="text-3xl font-black">سلام! من طراح وب هستم</h2>
-            <p className="mt-4 text-[15.5px] leading-8 text-muted">
-              بیش از ۷ سال است وب‌سایت می‌سازم — سایت‌هایی که هم زیبا هستند و هم
-              نتیجه می‌سازند. تخصص من ترکیب طراحی مدرن با کدنویسی تمیز و سریع
-              است؛ از فروشگاه آنلاین تا سامانه‌های سفارشی. اگر دنبال کسی هستید
-              که هم سلیقه دارد و هم تعهد، جای درستی آمده‌اید.
+            <div className="text-[13.5px] font-extrabold tracking-wide text-primary">— درباره من</div>
+            <h2 className="mt-3 text-4xl font-black">سلام! من ریما هستم 👋</h2>
+            <p className="mt-4 text-[15.5px] leading-9 text-muted">
+              ۷ سال است وب‌سایت می‌سازم و در این سال‌ها یاد گرفته‌م فرمول موفقیت یک
+              وب‌سایت چیست: طراحی که اعتماد می‌سازد، سرعتی که مشتری را نگه می‌دارد و
+              ساختاری که در گوگل دیده شود. اگر دنبال کسی هستید که هم سلیقه دارد هم
+              تعهد — جای درستی آمده‌اید.
             </p>
-            <Link
-              href="/about"
-              className="btn-glow mt-7 inline-block rounded-xl bg-primary px-7 py-3 text-sm font-bold text-white transition hover:bg-primary-dark"
-            >
-              بیشتر درباره من
+            <Link href="/about" className="btn-hard btn-hard-ghost mt-7">
+              بیشتر درباره‌ام بدانید
             </Link>
           </div>
         </section>
 
         {/* ─── CTA band ─── */}
         <section className="mx-auto max-w-6xl px-6 pb-24">
-          <div className="rounded-[28px] border border-primary/35 bg-gradient-to-l from-accent/8 to-primary/16 px-8 py-16 text-center sm:px-16">
-            <h2 className="text-3xl font-black">پروژه‌ای در ذهن دارید؟</h2>
-            <p className="mt-3.5 text-[15.5px] text-muted">برای مشاوره اولیه رایگان، همین حالا پیام بدهید</p>
-            <Link
-              href="/contact"
-              className="btn-glow mt-8 inline-block rounded-xl bg-primary px-9 py-3.5 text-[15px] font-bold text-white transition hover:bg-primary-dark"
-            >
-              درخواست مشاوره
+          <div className="relative overflow-hidden rounded-[32px] bg-ink px-8 py-18 text-center sm:px-16">
+            <h2 className="text-3xl font-black text-bg sm:text-4xl">
+              بیا وب‌سایتت را با هم <em className="text-accent not-italic">بسازیم</em>
+            </h2>
+            <p className="mt-3.5 text-[15.5px] font-medium text-bg/70">
+              قسمت سخت با من؛ شما فقط رویای کسب‌وکارتان را تعریف کنید
+            </p>
+            <Link href="/contact" className="btn-hard btn-hard-inverse mt-8">
+              گفتگو را شروع کنیم
             </Link>
           </div>
         </section>

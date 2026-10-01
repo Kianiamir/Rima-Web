@@ -27,19 +27,17 @@ export default function AboutPage() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-4xl px-6 py-16">
-        <h1 className="text-4xl font-black">
-          داستان <span className="text-gradient">ریماوب</span>
+        <div className="text-[13.5px] font-extrabold tracking-wide text-primary">— درباره من</div>
+        <h1 className="mt-3 text-4xl font-black">
+          داستان <span className="text-primary">ریماوب</span>
         </h1>
 
-        <div className="mt-10 grid items-center gap-12 lg:grid-cols-[280px_1fr]">
+        <div className="mt-12 grid items-center gap-12 lg:grid-cols-[280px_1fr]">
           <div
-            className="mx-auto flex h-64 w-64 items-center justify-center rounded-[26px] border border-line"
-            style={{
-              background:
-                "radial-gradient(180px 180px at 30% 25%, rgba(124,108,255,.5), rgba(21,24,36,.2)), var(--color-surface)",
-            }}
+            className="mx-auto flex h-[320px] w-[280px] items-end justify-center rounded-t-full border-2 border-ink pb-6"
+            style={{ background: "linear-gradient(160deg, #C7D2FE, #4F46E5)" }}
           >
-            <span className="text-8xl font-black text-gradient">ر</span>
+            <span className="text-6xl font-black text-white">ریما</span>
           </div>
           <div className="text-[15.5px] leading-9 text-ink/90">
             <p>
@@ -62,9 +60,12 @@ export default function AboutPage() {
 
         <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {FACTS.map(([b, s]) => (
-            <div key={s} className="rounded-2xl border border-line bg-surface px-4 py-6 text-center">
-              <b className="block text-2xl font-black text-primary-soft">{b}</b>
-              <span className="mt-1 block text-xs font-semibold text-muted">{s}</span>
+            <div
+              key={s}
+              className="rounded-[18px] border-2 border-ink bg-surface px-4 py-6 text-center shadow-[4px_4px_0_var(--color-line)]"
+            >
+              <b className="block text-2xl font-black text-primary">{b}</b>
+              <span className="mt-1 block text-xs font-bold text-muted">{s}</span>
             </div>
           ))}
         </div>
@@ -75,11 +76,11 @@ export default function AboutPage() {
             <div key={label}>
               <div className="mb-2 flex items-center justify-between text-sm">
                 <span className="font-bold">{label}</span>
-                <span className="text-muted">{pct}٪</span>
+                <span className="font-semibold text-muted">{pct}٪</span>
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-surface-2">
+              <div className="h-3 overflow-hidden rounded-full border-2 border-ink bg-surface">
                 <div
-                  className="h-full rounded-full bg-gradient-to-l from-primary to-accent"
+                  className="h-full rounded-full bg-primary"
                   style={{ width: `${pct}%` }}
                 />
               </div>
@@ -87,13 +88,12 @@ export default function AboutPage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-[24px] border border-primary/35 bg-gradient-to-l from-accent/8 to-primary/16 p-10 text-center">
-          <h2 className="text-2xl font-black">بیا با هم شروع کنیم</h2>
-          <p className="mt-3 text-sm text-muted">اولین مشاوره رایگان است — بدون تعهد</p>
-          <Link
-            href="/contact"
-            className="btn-glow mt-6 inline-block rounded-xl bg-primary px-8 py-3 font-bold text-white transition hover:bg-primary-dark"
-          >
+        <div className="mt-16 rounded-[28px] border-2 border-ink bg-ink p-10 text-center text-bg shadow-[6px_6px_0_var(--color-primary)]">
+          <h2 className="text-2xl font-black">
+            بیا با هم <span className="text-accent">شروع کنیم</span>
+          </h2>
+          <p className="mt-3 text-sm font-medium text-bg/70">اولین مشاوره رایگان است — بدون تعهد</p>
+          <Link href="/contact" className="btn-hard btn-hard-inverse mt-6">
             تماس با من
           </Link>
         </div>

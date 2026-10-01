@@ -43,7 +43,7 @@ export default async function AdminLayout({
             <form action={logoutAction}>
               <button
                 type="submit"
-                className="rounded-lg border border-line px-4 py-2 text-xs font-bold text-muted transition hover:border-red-500/50 hover:text-red-300"
+                className="rounded-lg border-2 border-line px-4 py-2 text-xs font-bold text-muted transition hover:border-red-500/60 hover:text-red-500"
               >
                 خروج
               </button>

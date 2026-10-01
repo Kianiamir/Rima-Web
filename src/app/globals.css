@@ -1,46 +1,48 @@
 @import "tailwindcss";
 @import "vazirmatn/Vazirmatn-font-face.css";
 
+/* ── پالت «نیلی — روشن و حرفه‌ای» ──────────────────────────────
+   انتخاب نهایی کاربر (پالت ۱): نیلی اعتمادساز روی زمینهٔ روشن با
+   اکسنت کهربایی. تم پیش‌فرض روشن است؛ html.dark واریانت شبانهٔ نیلی
+   را فعال می‌کند و کل UI چون به همین توکن‌ها اشاره می‌کند، دنباله‌رو است. */
+
 @theme {
-  --color-bg: #0b0d14;
-  --color-surface: #151824;
-  --color-surface-2: #1b1f33;
-  --color-line: #262b3d;
-  --color-ink: #eef0f8;
-  --color-muted: #8b90a5;
-  --color-primary: #7c6cff;
-  --color-primary-dark: #5b4bd6;
-  --color-primary-soft: #a78bfa;
-  --color-accent: #2dd4bf;
+  --color-bg: #fafaf8;
+  --color-surface: #ffffff;
+  --color-surface-2: #f2f1ec;
+  --color-line: #e7e5e4;
+  --color-ink: #1b2340;
+  --color-muted: #64748b;
+  --color-primary: #4f46e5;
+  --color-primary-dark: #3730a3;
+  --color-primary-soft: #4338ca;
+  --color-accent: #f59e0b;
+  --color-accent-ink: #b45309;
 
   --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
 }
 
+:root {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+  --color-bg: #0f132a;
+  --color-surface: #171c38;
+  --color-surface-2: #1f2547;
+  --color-line: #2b3160;
+  --color-ink: #eaecf9;
+  --color-muted: #9aa3c7;
+  --color-primary: #818cf8;
+  --color-primary-dark: #6366f1;
+  --color-primary-soft: #a5b4fc;
+  --color-accent: #fbbf24;
+  --color-accent-ink: #fcd34d;
+}
+
 html {
   scroll-behavior: smooth;
-}
-
-/* ── Theme system ───────────────────────────────────────────────
-   Dark «کهکشان» is the brand default; html.light flips the tokens.
-   Utilities (bg-surface, text-ink, …) reference these vars, so the
-   whole UI follows the toggle. */
-
-:root {
-  color-scheme: dark;
-}
-
-html.light {
-  color-scheme: light;
-  --color-bg: #f6f6fb;
-  --color-surface: #ffffff;
-  --color-surface-2: #ecedfa;
-  --color-line: #e2e1f0;
-  --color-ink: #1d1c30;
-  --color-muted: #62667f;
-  --color-primary: #6558e6;
-  --color-primary-dark: #5345cf;
-  --color-primary-soft: #6558e6;
-  --color-accent: #0e9384;
 }
 
 body {
@@ -52,34 +54,172 @@ body {
 }
 
 ::selection {
-  background: rgba(124, 108, 255, 0.35);
+  background: rgba(79, 70, 229, 0.22);
+}
+html.dark ::selection {
+  background: rgba(129, 140, 248, 0.35);
 }
 
-/* Gradient headline text */
+/* ── Component classes (زبان طراحی UI-C) ─────────────────────── */
+
+@layer components {
+  /* دکمه‌های سخت: قاب دوپیکسهای جوهری با سایهٔ آفست */
+  .btn-hard {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 0.8rem 1.7rem;
+    border-radius: 14px;
+    border: 2px solid var(--color-ink);
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+  }
+  .btn-hard-primary {
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 4px 4px 0 var(--color-ink);
+  }
+  .btn-hard-primary:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-ink);
+    background: var(--color-primary-dark);
+  }
+  .btn-hard-ghost {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-line);
+  }
+  .btn-hard-ghost:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-line);
+  }
+  .btn-hard-inverse {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-bg);
+    box-shadow: 4px 4px 0 var(--color-accent);
+  }
+  .btn-hard-inverse:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-accent);
+  }
+
+  /* چیپ خط‌چین هیرو */
+  .chip-dashed {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--color-primary);
+    border: 2px dashed var(--color-primary);
+    border-radius: 999px;
+    padding: 7px 18px;
+  }
+
+  /* برچسب چرخیده هیرو */
+  .sticker {
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 12.5px;
+    font-weight: 800;
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: 2px solid var(--color-ink);
+    transform: rotate(-8deg);
+    box-shadow: 3px 3px 0 var(--color-ink);
+    white-space: nowrap;
+  }
+
+  /* بندانگشتی طاقی شکل نمونه‌کار */
+  .arch {
+    border-radius: 999px 999px 24px 24px;
+    border: 2px solid var(--color-ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tagf {
+    position: absolute;
+    bottom: 14px;
+    inset-inline-start: 50%;
+    transform: translateX(50%);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 16px;
+    white-space: nowrap;
+  }
+
+  /* نوار متحرک مارکی */
+  .marquee {
+    border-block: 2px solid var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-bg);
+    overflow: hidden;
+    padding: 15px 0;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    font-size: 15.5px;
+    font-weight: 800;
+    animation: marquee 26s linear infinite;
+  }
+  .marquee-track > span {
+    padding-inline: 24px;
+  }
+  .marquee-track i {
+    font-style: normal;
+    color: var(--color-accent);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Gradient headline text (legacy helper — still used by admin + inner pages) */
 .text-gradient {
-  background: linear-gradient(90deg, var(--color-primary-soft), var(--color-accent));
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Primary button glow */
+/* Primary button glow (legacy helper — indigo glow instead of the old purple) */
 .btn-glow {
-  box-shadow: 0 8px 30px -8px rgba(124, 108, 255, 0.55);
+  box-shadow: 0 8px 24px -8px rgba(79, 70, 229, 0.45);
+}
+html.dark .btn-glow {
+  box-shadow: 0 8px 24px -8px rgba(129, 140, 248, 0.35);
 }
 
-/* Soft hero radial glows */
+/* هالهٔ ملایم هیرو — نیلی/کهربایی روی روشن، تیره‌تر در تم شب */
 .hero-glow {
   background:
-    radial-gradient(600px 300px at 70% 20%, rgba(124, 108, 255, 0.22), transparent 70%),
-    radial-gradient(500px 260px at 25% 10%, rgba(45, 212, 191, 0.13), transparent 70%);
+    radial-gradient(560px 280px at 78% 12%, rgba(79, 70, 229, 0.10), transparent 70%),
+    radial-gradient(460px 240px at 18% 8%, rgba(245, 158, 11, 0.08), transparent 70%);
 }
-
-/* Softer glows on the light theme */
-html.light .hero-glow {
+html.dark .hero-glow {
   background:
-    radial-gradient(600px 300px at 70% 20%, rgba(101, 88, 230, 0.10), transparent 70%),
-    radial-gradient(500px 260px at 25% 10%, rgba(14, 147, 132, 0.08), transparent 70%);
+    radial-gradient(560px 280px at 78% 12%, rgba(129, 140, 248, 0.14), transparent 70%),
+    radial-gradient(460px 240px at 18% 8%, rgba(251, 191, 36, 0.06), transparent 70%);
 }
 
 /* Fade-up entrance, respects reduced motion */

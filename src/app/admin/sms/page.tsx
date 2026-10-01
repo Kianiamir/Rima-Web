@@ -13,7 +13,7 @@ const STATUS_STYLES: Record<string, string> = {
   PENDING: "border-line bg-surface-2 text-muted",
   SENT: "border-accent/40 bg-accent/10 text-accent",
   SANDBOX: "border-primary/40 bg-primary/10 text-primary-soft",
-  FAILED: "border-red-500/40 bg-red-500/10 text-red-400",
+  FAILED: "border-red-500/40 bg-red-500/10 text-red-500",
 };
 
 const STATUS_LABELS: Record<string, string> = {
@@ -82,7 +82,7 @@ export default async function AdminSmsPage() {
                         {STATUS_LABELS[row.status] ?? row.status}
                       </span>
                       {row.error ? (
-                        <p className="mt-1 max-w-56 truncate text-[11px] text-red-400">
+                        <p className="mt-1 max-w-56 truncate text-[11px] text-red-500">
                           {row.error}
                         </p>
                       ) : null}

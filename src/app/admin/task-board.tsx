@@ -137,7 +137,7 @@ function DeleteTaskButton({ id }: { id: number }) {
       aria-label="حذف"
       disabled={pending}
       onClick={() => startTransition(() => deleteTask(id))}
-      className={`${btn} hover:border-red-500/50 hover:text-red-300`}
+      className={`${btn} hover:border-red-500/50 hover:text-red-500`}
     >
       ✕
     </button>

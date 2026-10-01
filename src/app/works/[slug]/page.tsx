@@ -47,25 +47,25 @@ export default async function ProjectPage({
     <>
       <SiteHeader />
       <main className="mx-auto max-w-4xl px-6 py-14">
-        <Link href="/works" className="text-sm font-semibold text-accent transition hover:opacity-80">
+        <Link href="/works" className="text-sm font-bold text-accent-ink transition hover:opacity-80">
           → بازگشت به نمونه‌کارها
         </Link>
 
-        <div className="mt-6 h-64 rounded-[24px] border border-line sm:h-80" style={cover} />
+        <div className="arch mt-6 h-64 max-w-[420px] sm:h-80" style={cover} />
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <span className="rounded-full bg-primary/15 px-4 py-1.5 text-xs font-bold text-primary-soft">
+          <span className="rounded-full border-2 border-ink bg-primary/10 px-4 py-1.5 text-xs font-extrabold text-primary-soft">
             {project.category}
           </span>
           {project.year && (
-            <span className="rounded-full border border-line px-4 py-1.5 text-xs font-bold text-muted">
+            <span className="rounded-full border-2 border-line px-4 py-1.5 text-xs font-bold text-muted">
               {project.year}
             </span>
           )}
         </div>
 
         <h1 className="mt-5 text-4xl font-black">{project.title}</h1>
-        <p className="mt-4 text-lg leading-8 text-muted">{project.summary}</p>
+        <p className="mt-4 text-lg leading-8 font-medium text-muted">{project.summary}</p>
 
         {project.description && (
           <div className="mt-8 whitespace-pre-line text-[15.5px] leading-9 text-ink/90">
@@ -76,7 +76,7 @@ export default async function ProjectPage({
         {tags.length > 0 && (
           <div className="mt-8 flex flex-wrap gap-2">
             {tags.map((t) => (
-              <span key={t} className="rounded-full border border-line px-4 py-1.5 text-xs font-semibold text-muted">
+              <span key={t} className="rounded-full border-2 border-line px-4 py-1.5 text-xs font-bold text-muted">
                 {t}
               </span>
             ))}
@@ -84,12 +84,7 @@ export default async function ProjectPage({
         )}
 
         {project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-glow mt-10 inline-block rounded-xl bg-primary px-8 py-3.5 font-bold text-white transition hover:bg-primary-dark"
-          >
+          <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-hard btn-hard-primary mt-10">
             مشاهده وب‌سایت ↗
           </a>
         )}

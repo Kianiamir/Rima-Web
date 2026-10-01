@@ -25,12 +25,12 @@ export function ProjectRowActions({ id, published }: { id: number; published: bo
       </button>
       {confirming ? (
         <span className="flex items-center gap-1.5 text-xs">
-          <span className="text-red-300">حذف؟</span>
+          <span className="text-red-500">حذف؟</span>
           <button
             type="button"
             disabled={pending}
             onClick={() => startTransition(() => deleteProject(id))}
-            className="rounded-lg bg-red-500/20 px-3 py-2 font-bold text-red-300 hover:bg-red-500/30 disabled:opacity-50"
+            className="rounded-lg bg-red-500/20 px-3 py-2 font-bold text-red-500 hover:bg-red-500/30 disabled:opacity-50"
           >
             بله
           </button>
@@ -42,7 +42,7 @@ export function ProjectRowActions({ id, published }: { id: number; published: bo
         <button
           type="button"
           onClick={() => setConfirming(true)}
-          className={`${btn} text-muted hover:border-red-500/50 hover:text-red-300`}
+          className={`${btn} text-muted hover:border-red-500/50 hover:text-red-500`}
         >
           حذف
         </button>

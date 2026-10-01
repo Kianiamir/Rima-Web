@@ -33,16 +33,16 @@ export function ContactForm() {
   }
 
   const inputCls =
-    "w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted/60 focus:border-primary/60";
+    "w-full rounded-xl border-2 border-ink/20 bg-surface px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted/60 focus:border-primary";
 
   if (status === "sent") {
     return (
-      <div className="rounded-2xl border border-accent/40 bg-accent/10 p-8 text-center">
-        <p className="text-lg font-bold text-accent">پیام‌تان رسید! ✓</p>
-        <p className="mt-2 text-sm text-muted">در اسرع وقت با شما تماس می‌گیرم.</p>
+      <div className="rounded-[22px] border-2 border-ink bg-accent/15 p-8 text-center shadow-[5px_5px_0_var(--color-line)]">
+        <p className="text-lg font-black text-accent-ink">پیام‌تان رسید! ✓</p>
+        <p className="mt-2 text-sm font-medium text-muted">در اسرع وقت با شما تماس می‌گیرم.</p>
         <button
           onClick={() => setStatus("idle")}
-          className="mt-5 rounded-lg border border-line px-5 py-2 text-sm font-semibold text-ink transition hover:border-primary/50"
+          className="btn-hard btn-hard-ghost mt-5 !px-5 !py-2.5 !text-sm"
         >
           ارسال پیام دیگر
         </button>
@@ -86,12 +86,12 @@ export function ContactForm() {
         />
       </div>
       {status === "error" && (
-        <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">{error}</p>
+        <p className="rounded-xl border-2 border-red-500/50 bg-red-500/10 px-4 py-3 text-sm font-bold text-red-500">{error}</p>
       )}
       <button
         type="submit"
         disabled={status === "sending"}
-        className="btn-glow rounded-xl bg-primary px-8 py-3.5 font-bold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-hard btn-hard-primary !px-8 !py-3.5 !text-[15px] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "sending" ? "در حال ارسال…" : "ارسال پیام"}
       </button>

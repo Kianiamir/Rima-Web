@@ -26,7 +26,7 @@ export function DeleteButton({ id }: { id: number }) {
       <button
         type="button"
         onClick={() => setConfirming(true)}
-        className="rounded-lg border border-line px-4 py-2 text-xs font-bold text-muted transition hover:border-red-500/50 hover:text-red-300"
+        className="rounded-lg border border-line px-4 py-2 text-xs font-bold text-muted transition hover:border-red-500/50 hover:text-red-500"
       >
         حذف
       </button>
@@ -34,12 +34,12 @@ export function DeleteButton({ id }: { id: number }) {
   }
   return (
     <span className="flex items-center gap-2 text-xs">
-      <span className="text-red-300">مطمئنید؟</span>
+      <span className="text-red-500">مطمئنید؟</span>
       <button
         type="button"
         disabled={pending}
         onClick={() => startTransition(() => deleteMessage(id))}
-        className="rounded-lg bg-red-500/20 px-4 py-2 font-bold text-red-300 transition hover:bg-red-500/30 disabled:opacity-50"
+        className="rounded-lg bg-red-500/20 px-4 py-2 font-bold text-red-500 transition hover:bg-red-500/30 disabled:opacity-50"
       >
         بله، حذف کن
       </button>

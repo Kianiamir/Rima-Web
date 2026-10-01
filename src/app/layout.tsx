@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 /** Runs before paint: stored theme wins, otherwise follow the OS preference. */
-const themeInitScript = `(function(){try{var s=localStorage.getItem("rimaweb-theme");var l=s?s==="light":window.matchMedia("(prefers-color-scheme: light)").matches;document.documentElement.classList.toggle("light",l)}catch(e){}})();`;
+const themeInitScript = `(function(){try{var s=localStorage.getItem("rimaweb-theme");var d=s?s==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d)}catch(e){}})();`;
 
 export default function RootLayout({
   children,

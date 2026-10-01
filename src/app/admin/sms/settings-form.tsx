@@ -6,7 +6,7 @@ import type { SmsSettingsView, SmsTemplateRow } from "@/modules/sms/actions";
 import { faNum } from "@/lib/format";
 
 function feedbackStyle(ok: boolean) {
-  return ok ? "text-accent" : "text-red-400";
+  return ok ? "text-accent" : "text-red-500";
 }
 
 export function SmsSettingsForm({
@@ -183,7 +183,7 @@ export function SmsSettingsForm({
             اعتبار باقی‌مانده: {faNum(credit)} پیامک
           </span>
         ) : null}
-        {creditError ? <span className="text-xs text-red-400">{creditError}</span> : null}
+        {creditError ? <span className="text-xs text-red-500">{creditError}</span> : null}
       </div>
 
       <div className="rounded-2xl border border-dashed border-line p-5">
